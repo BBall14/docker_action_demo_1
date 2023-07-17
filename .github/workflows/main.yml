@@ -19,4 +19,20 @@ jobs:
       - name: Build
         run: mvn clean package
 
+      - name: Login to GitHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secret.MY_SECRET_USERNAME }}
+          password: ${{ secret.MY_SECRET_PASSWORD }}
+      
+      - name: Build and push Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: rohitballer/githubafternoon:1.1
+
+
+
+
 
